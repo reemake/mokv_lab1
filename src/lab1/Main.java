@@ -12,10 +12,10 @@ public class Main {
             b += deltaA;
         }
 
+        float beta = b - a;
         float aNext = a + deltaA;
-        float beta = 0.0f;
-        while (beta == 0.0) {
-            deltaA += 1.0;
+        while (beta == 0.0f) {
+            deltaA += 1.0f;
             aNext = a + deltaA;
             beta = aNext - a;
         }
@@ -25,11 +25,12 @@ public class Main {
     /* Процедура определения разрядности мантиссы и машинной точности */
     static void epsMach(float beta) {
         float eps = 1.0f;
-        int counter = 0;
+        int counter = -1;
         while (1.0f + eps > 1.0f) {
             eps /= beta;
             counter++;
         }
+        eps *= beta;
         System.out.println("Разрядность мантиссы = " + counter);
         System.out.println("Машинный эпсилон = " + eps);
     }
@@ -51,5 +52,9 @@ public class Main {
         float beta = getRadix();
         System.out.println("Система счисления = " + (int)beta);
         epsMach(beta);
+
+        System.out.println("\n2^-23 = " + Math.pow(2, -23));
+        System.out.println("2^-24 = " + Math.pow(2, -24));
+
     }
 }
